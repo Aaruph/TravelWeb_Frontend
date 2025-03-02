@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white relative">
       <div className="absolute top-5 left-5">
-        <img src="/src/assets/images/logo.png" alt="Travel Logo" className="h-50" />
+        <img src="/src/assets/images/logo.png" alt="Travel Logo" className="h-25" />
       </div>
 
       <div className="relative w-full max-w-5xl flex overflow-hidden rounded-xl bg-teal-900/80 backdrop-blur-lg border border-white/20 shadow-xl p-10">
