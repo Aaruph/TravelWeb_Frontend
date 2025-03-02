@@ -54,7 +54,7 @@ const Register = () => {
     <div className="flex min-h-screen flex-col items-center justify-center bg-white relative">
       {/* Logo */}
       <div className="absolute top-5 left-5">
-        <img src="/src/assets/images/logo.png" alt="Travel Logo" className="h-50" />
+        <img src="/src/assets/images/logo.png" alt="Travel Logo" className="h-25" />
       </div>
 
       {/* Form Container */}
