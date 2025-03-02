@@ -86,4 +86,4 @@ const Favorite = () => {
   );
 };
 
-export default Favorite;
+export default Favorite; 
