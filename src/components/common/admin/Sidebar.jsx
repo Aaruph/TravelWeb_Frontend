@@ -12,7 +12,7 @@ import {
   Users
 } from "lucide-react";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Confirmed from "../../private/bookings/Confirmed";
 import Pending from "../../private/bookings/Pending";
 import AddPackages from "../../private/packages/AddPackages";
@@ -21,6 +21,7 @@ import ManagePackages from "../../private/packages/ManagePackages";
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [openMenus, setOpenMenus] = useState({});
+  const navigate = useNavigate(); // Hook for navigation
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
@@ -29,6 +30,12 @@ const Sidebar = () => {
   const toggleMenu = (menu) => {
     setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("role"); // Remove token from storage
+    window.location.href = "/login"; // Correct way to redirect
+};
+
 
   return (
     <div className={`h-screen ${isCollapsed ? "w-20" : "w-64"} bg-gray-900 text-white flex flex-col p-4 transition-all duration-300`}>
@@ -41,13 +48,11 @@ const Sidebar = () => {
       <h2 className={`text-xl font-bold mb-6 ${isCollapsed ? "hidden" : "block"}`}>Admin Panel</h2>
 
       <nav className="flex-1 space-y-2">
-        {/* Dashboard */}
         <Link to="/admin/dashboard" className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700">
           <Home size={20} />
           {!isCollapsed && <span>Dashboard</span>}
         </Link>
 
-        {/* Manage Packages */}
         <div>
           <button onClick={() => toggleMenu("packages")} className="flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-700">
             <div className="flex items-center gap-3">
@@ -64,7 +69,6 @@ const Sidebar = () => {
           )}
         </div>
 
-        {/* Manage Bookings */}
         <div>
           <button onClick={() => toggleMenu("bookings")} className="flex items-center justify-between w-full p-2 rounded-lg hover:bg-gray-700">
             <div className="flex items-center gap-3">
@@ -81,27 +85,24 @@ const Sidebar = () => {
           )}
         </div>
 
-        {/* Payments */}
         <Link to="/admin/payments" className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700">
           <CreditCard size={20} />
           {!isCollapsed && <span>Payments</span>}
         </Link>
 
-        {/* Users Management */}
         <Link to="/admin/users" className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700">
           <Users size={20} />
           {!isCollapsed && <span>Users</span>}
         </Link>
 
-        {/* Reviews */}
         <Link to="/admin/reviews" className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700">
           <Star size={20} />
           {!isCollapsed && <span>Reviews</span>}
         </Link>
       </nav>
 
-      {/* Logout */}
-      <button className="flex items-center gap-3 p-2 rounded-lg hover:bg-red-700">
+      {/* Logout Button */}
+      <button onClick={handleLogout} className="flex items-center gap-3 p-2 rounded-lg hover:bg-red-700">
         <LogOut size={20} />
         {!isCollapsed && <span>Logout</span>}
       </button>
